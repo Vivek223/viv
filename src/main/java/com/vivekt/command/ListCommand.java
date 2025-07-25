@@ -1,5 +1,8 @@
 package com.vivekt.command;
 
+
+import com.vivekt.model.Task;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,57 +16,59 @@ public class ListCommand implements Command {
 
     @Override
     public void execute() {
-        File listFile = new File(".data/list.csv");
-        if (!listFile.exists()) {
-            System.err.println("Error: .data/list.csv does not exist. Run 'init' first.");
-            return;
+        List<Task> tasks = loadTasks(new File(".data/list.csv"));
+        if (tasks == null) return;
+
+        tasks.sort(Comparator.comparingInt(t -> getStatusPriority(t.status)));
+
+        for (Task task : tasks) {
+            System.out.println(formatTask(task));
+        }
+    }
+
+    public List<Task> loadTasks(File csvFile) {
+        if (!csvFile.exists()) {
+            System.err.println("Error: " + csvFile + " does not exist.");
+            return null;
         }
 
-        List<String[]> tasks = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(listFile))) {
+        List<Task> tasks = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
             String line;
             boolean first = true;
 
             while ((line = reader.readLine()) != null) {
                 if (first) {
-                    first = false; // skip header
+                    first = false;
                     continue;
                 }
 
                 String[] parts = line.split(",", -1);
                 if (parts.length >= 4) {
-                    tasks.add(parts);
+                    tasks.add(new Task(parts[0], parts[1], parts[2], parts[3]));
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading list.csv: " + e.getMessage());
-            return;
+            System.err.println("Error reading file: " + e.getMessage());
+            return null;
         }
 
-        // Sort by status priority: in-progress > not-started > completed > others
-        tasks.sort(Comparator.comparingInt(a -> getStatusPriority(a[2])));
-
-        // Display
-        for (String[] parts : tasks) {
-            String id = parts[0];
-            String title = parts[1];
-            String status = parts[2];
-            String notes = parts[3];
-
-            String color = switch (status.toLowerCase()) {
-                case "completed" -> GREEN;
-                case "not-started" -> YELLOW;
-                case "in-progress" -> BLUE;
-                default -> RESET;
-            };
-
-            System.out.printf("%sID: %s | Title: %s | Status: %s | Notes: %s%s%n",
-                    color, id, title, status, notes, RESET);
-        }
+        return tasks;
     }
 
-    private int getStatusPriority(String status) {
+    public String formatTask(Task task) {
+        String color = switch (task.status.toLowerCase()) {
+            case "completed" -> GREEN;
+            case "not-started" -> YELLOW;
+            case "in-progress" -> BLUE;
+            default -> RESET;
+        };
+
+        return String.format("%sID: %s | Title: %s | Status: %s | Notes: %s%s",
+                color, task.id, task.title, task.status, task.notes, RESET);
+    }
+
+    public int getStatusPriority(String status) {
         return switch (status.toLowerCase()) {
             case "in-progress" -> 0;
             case "not-started" -> 1;
