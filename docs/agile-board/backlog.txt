@@ -1,2 +1,3 @@
 id,item,desc,status
-2,main entry point,create main class as entry point of the app,not-started
+3,impl command interface, base interface for all commands
+
