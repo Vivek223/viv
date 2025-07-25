@@ -1,0 +1,27 @@
+# Maven target directory
+/target/
+
+# Java class files
+*.class
+*.gitignore
+
+# Logs
+*.log
+
+# IDE-specific files
+# IntelliJ
+.idea/
+*.iml
+# Eclipse
+.classpath
+.project
+.settings/
+# VS Code
+.vscode/
+
+# OS-specific
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Environment files (optional)
+.env
