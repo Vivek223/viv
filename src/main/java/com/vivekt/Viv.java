@@ -2,6 +2,8 @@ package com.vivekt;
 
 import com.vivekt.command.*;
 
+import java.util.Arrays;
+
 public class Viv {
 
     public static void main(String[] args) {
@@ -26,6 +28,6 @@ public class Viv {
                 return;
         }
 
-        command.execute();
+        command.execute(Arrays.copyOfRange(args, 1, args.length));
     }
 }

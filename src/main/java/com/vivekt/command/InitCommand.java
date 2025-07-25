@@ -7,7 +7,7 @@ import java.io.IOException;
 public class InitCommand implements Command {
 
     @Override
-    public void execute() {
+    public void execute(String args[]) {
         File dataDir = new File(".data");
         if (!dataDir.exists()) {
             if (dataDir.mkdir()) {

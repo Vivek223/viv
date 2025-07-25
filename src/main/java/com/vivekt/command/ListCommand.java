@@ -1,10 +1,10 @@
 package com.vivekt.command;
 
-
 import com.vivekt.model.Task;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListCommand implements Command {
 
@@ -15,15 +15,52 @@ public class ListCommand implements Command {
     private static final String BLUE = "\u001B[34m";
 
     @Override
-    public void execute() {
+    public void execute(String[] args) {
+        Map<String, Integer> limitFlags = parseFlags(args);
+
         List<Task> tasks = loadTasks(new File(".data/list.csv"));
         if (tasks == null) return;
 
+        // Sort by status priority
         tasks.sort(Comparator.comparingInt(t -> getStatusPriority(t.status)));
 
-        for (Task task : tasks) {
-            System.out.println(formatTask(task));
+        // Group by status
+        Map<String, List<Task>> grouped = tasks.stream()
+                .collect(Collectors.groupingBy(t -> t.status.toLowerCase()));
+
+        // Order we want to print in
+        List<String> order = List.of("in-progress", "not-started", "completed");
+
+        for (String status : order) {
+            List<Task> group = grouped.getOrDefault(status, Collections.emptyList());
+
+            int limit = limitFlags.getOrDefault(status, Integer.MAX_VALUE);
+            List<Task> toDisplay = group.stream().limit(limit).toList();
+
+            for (Task task : toDisplay) {
+                if (!toDisplay.isEmpty()) {
+                    System.out.println("\n-- " + status.toUpperCase() + " --");
+                }
+
+                System.out.println(formatTask(task));
+            }
         }
+    }
+
+    public Map<String, Integer> parseFlags(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String arg : args) {
+            if (arg.startsWith("--") && arg.contains("=")) {
+                String[] parts = arg.substring(2).split("=", 2);
+                String status = parts[0].toLowerCase();
+                try {
+                    int count = Integer.parseInt(parts[1]);
+                    map.put(status, count);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+        }
+        return map;
     }
 
     public List<Task> loadTasks(File csvFile) {
