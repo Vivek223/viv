@@ -24,7 +24,12 @@ public class InitCommand implements Command {
         if (!listFile.exists()) {
             try (FileWriter writer = new FileWriter(listFile)) {
                 writer.write("id,title,status,notes\n");
-                writer.write("1,Sample Task,not-started,This is a sample note\n");
+                writer.write("1,Sample Task,completed,This is a sample note\n");
+                writer.write("2,Sample Task,not-started,This is a sample note\n");
+                writer.write("3,Sample Task,not-started,This is a sample note\n");
+                writer.write("4,Sample Task,not-started,This is a sample note\n");
+                writer.write("5,Sample Task,in-progress,This is a sample note\n");
+                writer.write("6,Sample Task,in-progress,This is a sample note\n");
                 System.out.println("Initialized list.csv with sample data.");
             } catch (IOException e) {
                 System.err.println("Failed to write list.csv: " + e.getMessage());
