@@ -38,9 +38,9 @@ public class ListCommand implements Command {
             List<Task> toDisplay = group.stream().limit(limit).toList();
 
             for (Task task : toDisplay) {
-                if (!toDisplay.isEmpty()) {
-                    System.out.println("\n-- " + status.toUpperCase() + " --");
-                }
+//                if (!toDisplay.isEmpty()) {
+//                    System.out.println("\n-- " + status.toUpperCase() + " --");
+//                }
 
                 System.out.println(formatTask(task));
             }

@@ -1,3 +1,7 @@
 id,item,desc,status
-3,impl command interface, base interface for all commands
+5,colored output,impl color coding in the output, COMPLETED
+4,impl list command,lists items in various states,COMPLETED
+3,impl command interface, base interface for all commands,COMPLETED
+2,main entry point,create main class as entry point of the app,COMPLETED
+1,project setup,maven based setup of this project,COMPLETED
 
