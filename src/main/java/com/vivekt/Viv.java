@@ -23,6 +23,9 @@ public class Viv {
             case "list":
                 command = new ListCommand();
                 break;
+            case "status":
+                command = new Status();
+                break;
             default:
                 System.out.println("Unknown command: " + commandName);
                 return;
