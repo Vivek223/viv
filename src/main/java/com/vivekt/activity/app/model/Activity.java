@@ -1,13 +1,5 @@
 package com.vivekt.activity.app.model;
 
-import lombok.*;
-
-
-//@Builder
-//@Getter
-//@AllArgsConstructor
-////@NoArgsConstructor
-//@Setter
 public class Activity {
     Long id;
     String title;
@@ -48,5 +40,15 @@ public class Activity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", desc='" + desc + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
