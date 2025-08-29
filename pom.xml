@@ -8,13 +8,16 @@
     <artifactId>com.vivekt.Viv</artifactId>
     <version>1.0.0</version>
     <name>Task CLI App</name>
+    <properties>
+        <spring-version>3.1.10</spring-version>
+    </properties>
     <description>Simple Java CLI app to mimic git-like commands using CSV</description>
     <dependencies>
         <!-- Spring Boot Starter Web (includes Spring MVC, Jackson, Tomcat) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.1.10</version>
+            <version>${spring-version}</version>
         </dependency>
 
         <!-- Spring Boot Starter Test (JUnit, Mockito, AssertJ, etc.) -->
@@ -22,13 +25,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>3.1.10</version>
+            <version>${spring-version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <version>3.1.10</version>
+            <version>${spring-version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -48,6 +51,12 @@
             <artifactId>junit-jupiter</artifactId>
             <version>5.10.0</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.14.0</version>
         </dependency>
 
     </dependencies>
