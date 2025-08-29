@@ -11,7 +11,7 @@ public class RandomMp3Selector {
     public static void main(String[] args) {
         // Change these paths as per your environment
         Path rootFolder = Paths.get("C:\\ent\\backup\\songs");     // root folder containing mp3s
-        Path tempFolder = Paths.get("C:\\ent\\backup\\list3");   // destination folder
+        Path tempFolder = Paths.get("C:\\ent\\backup\\list");   // destination folder
 
         int filesToCopy = 10;
 
