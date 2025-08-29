@@ -1,16 +1,3 @@
 id,item,desc,status
-14,UI,socket.io or stomp based UI,not-started
-13,UI,React UI to expose the commands,not-started
-12,kafka experiment,create a branch and create kafka version of list command,not-started
-11,health command,implement a command to keep track and display health details,not-started
-10,fin command,implement fin command to show fin details,not-started
-9,CI/CD pipeline,setup pipeline on github,not-started
-8,static code analysis,sonar cube scan setup,not-started
-7,portability check,implement a different version of list command and wire it,not-started
-6,task details,implement a flag in list command to print details,not-started
-5,colored output,impl color coding in the output, COMPLETED
-4,impl list command,lists items in various states,COMPLETED
-3,impl command interface, base interface for all commands,COMPLETED
-2,main entry point,create main class as entry point of the app,COMPLETED
-1,project setup,maven based setup of this project,COMPLETED
+1,Refactor project,maven based setup of this project,COMPLETED
 
