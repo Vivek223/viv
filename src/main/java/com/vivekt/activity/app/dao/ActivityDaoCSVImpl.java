@@ -4,10 +4,14 @@ import com.vivekt.activity.app.model.Activity;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class ActivityDaoCSVImpl implements ActivityDao{
@@ -46,6 +50,28 @@ public class ActivityDaoCSVImpl implements ActivityDao{
             throw new RuntimeException("Error writing to CSV file", e);
         }
         return activity;
+    }
+
+    @Override
+    public List<Activity> findAll() {
+        File file = new File(pathToCSV);
+        boolean fileExists = file.exists();
+        System.out.println("FILE Exists:" + fileExists);
+
+        List<Activity> result = new ArrayList<>();
+
+        try (Scanner sc = new Scanner(file)) {
+            sc.nextLine(); // discard header row
+            while(sc.hasNext()){
+                String line = sc.nextLine();
+                Activity activity = new Activity(line);
+                result.add(activity);
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return result;
     }
 
     /**

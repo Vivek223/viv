@@ -1,3 +1,3 @@
 id,item,desc,status
-1,Refactor project,maven based setup of this project,COMPLETED
-
+1,list activities use case,create html page and list activities,not-started
+2,change dao to save and list from Kafka,create html page and list activities,not-started

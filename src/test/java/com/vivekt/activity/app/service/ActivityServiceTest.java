@@ -22,9 +22,14 @@ class ActivityServiceTest {
     }
 
     @Test
+    void testListActivities(){
+
+    }
+
+    @Test
     void testCreateActivityConvertsToUpperCase() {
         // Original input in lowercase
-        Activity input = new Activity("read book", "read fiction books");
+        Activity input = new Activity("read book", "read fiction books", "st");
 
         // We don't care what DAO returns; just mock it to return something
         when(daoMock.createActivity(any(Activity.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -49,8 +54,8 @@ class ActivityServiceTest {
     @Test
     void testCreateActivityInCamelCase(){
         //Arrange
-        Activity input = new Activity("play a song", "hindi music");
-        Activity expected = new Activity("Play A Song", "Hindi Music");
+        Activity input = new Activity("play a song", "hindi music", "st");
+        Activity expected = new Activity("Play A Song", "Hindi Music", "st");
 
         // We don't care what DAO returns; just mock it to return something
         when(daoMock.createActivity(any(Activity.class))).thenAnswer(invocation -> invocation.getArgument(0));
