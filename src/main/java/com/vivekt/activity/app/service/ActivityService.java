@@ -3,6 +3,9 @@ package com.vivekt.activity.app.service;
 import com.vivekt.activity.app.MyUtil;
 import com.vivekt.activity.app.dao.ActivityDao;
 import com.vivekt.activity.app.model.Activity;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 
 public class ActivityService {
@@ -14,7 +17,7 @@ public class ActivityService {
     }
 
     public Activity createActivity(Activity activity) {
-        Activity a = new Activity(activity.getTitle().toUpperCase(), activity.getDesc().toUpperCase());
+        Activity a = new Activity(activity.getTitle().toUpperCase(), activity.getDesc().toUpperCase(), activity.getStatus().toUpperCase());
         return dao.createActivity(a);
     }
 
@@ -22,9 +25,15 @@ public class ActivityService {
         //Activity a = new Activity(activity.getTitle().)
         String title = MyUtil.capitalizeFirstLetter(activity.getTitle());
         String desc = MyUtil.capitalizeFirstLetter(activity.getDesc());
-        Activity enrichedActivity = new Activity(title, desc);
+        String status = activity.getStatus();
+
+        Activity enrichedActivity = new Activity(title, desc, status.toUpperCase());
 
         return dao.createActivity(enrichedActivity);
 
+    }
+
+    public List<Activity> listActivities(){
+        return dao.findAll();
     }
 }

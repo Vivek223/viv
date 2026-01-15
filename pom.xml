@@ -59,6 +59,13 @@
             <version>3.14.0</version>
         </dependency>
 
+        <!-- Apache Kafka client library -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>3.7.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

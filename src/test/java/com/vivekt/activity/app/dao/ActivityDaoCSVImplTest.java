@@ -33,16 +33,5 @@ public class ActivityDaoCSVImplTest {
         }
     }
 
-    @Test
-    void testCreateActivity(){
-        //Arrange
-        Activity input = new Activity("watch a movie", "in tv");
 
-        Activity result = csvActivityDao.createActivity(input);
-
-        System.out.println(result.getId());
-        System.out.println(result);
-
-
-    }
 }

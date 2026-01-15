@@ -13,14 +13,26 @@ public class Activity {
         this.status = status;
     }
 
-    public Activity( String title, String desc) {
+    public Activity(String title, String desc, String status) {
 
         this.title = title;
         this.desc = desc;
+        this.status = status;
 
     }
 
-    public Activity(){}
+    public Activity(String csvRow) {
+        String[] fields = csvRow.split(",");
+        this.id = Long.parseLong(fields[0]);
+        this.title = fields[1];
+        this.desc = fields[2];
+        this.status = fields[3];
+
+
+    }
+
+    public Activity() {
+    }
 
     public Long getId() {
         return id;
